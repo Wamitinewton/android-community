@@ -16,7 +16,7 @@ class OnBoardingWelcomeScreen extends StatelessWidget {
                     image: AssetImage('assets/onBoarding.png'),
                     fit: BoxFit.cover)),
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -31,10 +31,10 @@ class OnBoardingWelcomeScreen extends StatelessWidget {
                           fontWeight: FontWeight.w600),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     "HOME BEAUTIFUL",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -48,7 +48,7 @@ class OnBoardingWelcomeScreen extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(horizontal: 80),
                     child: ElevatedButton(
                       onPressed: () {},
-                      child: Text(
+                      child: const Text(
                         'Get started',
                         style: TextStyle(color: Colors.white),
                       ),
@@ -60,7 +60,7 @@ class OnBoardingWelcomeScreen extends StatelessWidget {
                           )),
                     ),
                   ),
-                  Spacer(flex: 2,),
+                  const Spacer(flex: 2,),
                 ],
               ),
             ),

@@ -1,17 +1,16 @@
-import 'package:android_app1/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   String email = '';
 
@@ -28,14 +27,14 @@ class _LoginScreenState extends State<LoginScreen> {
           FocusScope.of(context).unfocus();
         },
         child: SafeArea(
-          minimum: const EdgeInsets.only(top: 60),
+          minimum: EdgeInsets.only(top: 60),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    const Flexible(
+                    Flexible(
                       child: Divider(
                         color: Colors.grey,
                         thickness: 1,
@@ -44,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     SvgPicture.asset("assets/furniture_vector.svg"),
-                    const Flexible(
+                    Flexible(
                       child: Divider(
                         color: Colors.grey,
                         thickness: 1,
@@ -54,8 +53,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 30, bottom: 10, top: 30),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30, bottom: 10, top: 30),
                   child: Text(
                     'Hello !',
                     style: TextStyle(
@@ -64,10 +63,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         fontWeight: FontWeight.w500),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 30, bottom: 30),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30, bottom: 30),
                   child: Text(
-                    "WELCOME",
+                    "WELCOME BACK",
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 30,
@@ -94,11 +93,22 @@ class _LoginScreenState extends State<LoginScreen> {
                             Padding(
                               padding: const EdgeInsets.only(left: 30, top: 35),
                               child: TextFormField(
+                                keyboardType: TextInputType.text,
+                                textInputAction: TextInputAction.next,
+                                cursorColor: Colors.black,
+                                decoration: InputDecoration(
+                                  labelText: "Name",
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 30, top: 35),
+                              child: TextFormField(
                                 keyboardType: TextInputType.emailAddress,
                                 textInputAction: TextInputAction.next,
                                 onChanged: _emailOnChanged,
                                 cursorColor: Colors.black,
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   labelText: "Email",
                                 ),
                               ),
@@ -112,65 +122,68 @@ class _LoginScreenState extends State<LoginScreen> {
                                 enableSuggestions: false,
                                 autocorrect: false,
                                 cursorColor: Colors.black,
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   labelText: "password",
                                   suffixIcon: Icon(Icons.remove_red_eye),
                                   suffixIconConstraints:
-                                      BoxConstraints(maxWidth: 50),
+                                      const BoxConstraints(maxWidth: 50),
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              height: 20,
+                             Padding(
+                              padding: const EdgeInsets.only(left: 30, top: 30),
+                              child: TextFormField(
+                                keyboardType: TextInputType.emailAddress,
+                                textInputAction: TextInputAction.next,
+                                obscureText: true,
+                                enableSuggestions: false,
+                                autocorrect: false,
+                                cursorColor: Colors.black,
+                                decoration: InputDecoration(
+                                  labelText: "confirm password",
+                                  suffixIcon: Icon(Icons.remove_red_eye),
+                                  suffixIconConstraints:
+                                      const BoxConstraints(maxWidth: 50),
+                                ),
+                              ),
                             ),
-                            TextButton(
-                                onPressed: () {},
-                                child: const Text(
-                                  'Forgot password',
-                                  style: TextStyle(
-                                    color:
-                                        Color.fromARGB(255, 47, 42, 42),
-                                    fontSize: 16,
-                                  ),
-                                )),
-                            const SizedBox(
+                           
+                            SizedBox(
                               height: 20,
                             ),
                             GestureDetector(
                               child: Container(
                                 height: 50,
                                 width: double.infinity,
-                                margin: const EdgeInsets.symmetric(horizontal: 30),
+                                margin: EdgeInsets.symmetric(horizontal: 30),
                                 decoration: BoxDecoration(
                                     color: Colors.black,
                                     borderRadius: BorderRadius.circular(8),
-                                    boxShadow: const [
-                                       BoxShadow(
+                                    boxShadow: [
+                                      BoxShadow(
                                         color: Color(0x5030303030),
                                         offset: Offset(0, 10),
                                         blurRadius: 20,
                                       )
                                     ]),
-                                child: const Center(
+                                child: Center(
                                     child: Text(
-                                  'Sign In',
+                                  'Register',
                                   style: TextStyle(color: Colors.white),
                                 )),
                               ),
                             ),
-                            const SizedBox(
+                            SizedBox(
                               height: 20,
                             ),
                             TextButton(
-                                onPressed: () {
-                                 Get.to(const RegisterScreen());
-                                },
-                                child: const Text(
-                                  "SIGN UP",
+                                onPressed: () {},
+                                child: Text(
+                                  "LOG IN",
                                   style: TextStyle(
                                       color: Colors.grey, fontSize: 17),
                                 )),
-                            const SizedBox(
+                            SizedBox(
                               height: 21,
                             ),
                           ],
