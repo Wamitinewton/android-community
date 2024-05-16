@@ -1,6 +1,8 @@
+import 'package:android_app1/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -11,6 +13,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final AuthController _authController = Get.find<AuthController>();
   final _formKey = GlobalKey<FormState>();
   String email = '';
 
@@ -27,14 +30,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
           FocusScope.of(context).unfocus();
         },
         child: SafeArea(
-          minimum: EdgeInsets.only(top: 60),
+          minimum: const EdgeInsets.only(top: 60),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    Flexible(
+                    const Flexible(
                       child: Divider(
                         color: Colors.grey,
                         thickness: 1,
@@ -43,7 +46,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                     SvgPicture.asset("assets/furniture_vector.svg"),
-                    Flexible(
+                    const Flexible(
                       child: Divider(
                         color: Colors.grey,
                         thickness: 1,
@@ -53,8 +56,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 30, bottom: 10, top: 30),
+                const Padding(
+                  padding: EdgeInsets.only(left: 30, bottom: 10, top: 30),
                   child: Text(
                     'Hello !',
                     style: TextStyle(
@@ -63,8 +66,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         fontWeight: FontWeight.w500),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 30, bottom: 30),
+                const Padding(
+                  padding: EdgeInsets.only(left: 30, bottom: 30),
                   child: Text(
                     "WELCOME BACK",
                     style: TextStyle(
@@ -93,10 +96,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             Padding(
                               padding: const EdgeInsets.only(left: 30, top: 35),
                               child: TextFormField(
+                                controller: _authController.name,
                                 keyboardType: TextInputType.text,
                                 textInputAction: TextInputAction.next,
                                 cursorColor: Colors.black,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   labelText: "Name",
                                 ),
                               ),
@@ -104,11 +108,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             Padding(
                               padding: const EdgeInsets.only(left: 30, top: 35),
                               child: TextFormField(
+                                controller: _authController.mail,
                                 keyboardType: TextInputType.emailAddress,
                                 textInputAction: TextInputAction.next,
                                 onChanged: _emailOnChanged,
                                 cursorColor: Colors.black,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   labelText: "Email",
                                 ),
                               ),
@@ -118,72 +123,91 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               child: TextFormField(
                                 keyboardType: TextInputType.emailAddress,
                                 textInputAction: TextInputAction.next,
+                                controller: _authController.pwd,
                                 obscureText: true,
                                 enableSuggestions: false,
                                 autocorrect: false,
                                 cursorColor: Colors.black,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   labelText: "password",
                                   suffixIcon: Icon(Icons.remove_red_eye),
                                   suffixIconConstraints:
-                                      const BoxConstraints(maxWidth: 50),
+                                      BoxConstraints(maxWidth: 50),
                                 ),
                               ),
                             ),
-                             Padding(
+                            Padding(
                               padding: const EdgeInsets.only(left: 30, top: 30),
                               child: TextFormField(
+                                controller: _authController.cfmpwd,
                                 keyboardType: TextInputType.emailAddress,
                                 textInputAction: TextInputAction.next,
                                 obscureText: true,
                                 enableSuggestions: false,
                                 autocorrect: false,
                                 cursorColor: Colors.black,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   labelText: "confirm password",
                                   suffixIcon: Icon(Icons.remove_red_eye),
                                   suffixIconConstraints:
-                                      const BoxConstraints(maxWidth: 50),
+                                      BoxConstraints(maxWidth: 50),
                                 ),
                               ),
                             ),
-                           
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             GestureDetector(
+                              onTap: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  if (_authController.pwd.text ==
+                                      _authController.cfmpwd.text) {
+                                    await _authController.signUp(
+                                        _authController.name.text,
+                                        _authController.mail.text,
+                                        _authController.pwd.text,
+                                        _authController.cfmpwd.text);
+                                  } else {
+                                    Fluttertoast.showToast(
+                                      msg: "passwords do not match",
+                                      backgroundColor: Colors.redAccent,
+                                    );
+                                  }
+                                }
+                              },
                               child: Container(
                                 height: 50,
                                 width: double.infinity,
-                                margin: EdgeInsets.symmetric(horizontal: 30),
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 30),
                                 decoration: BoxDecoration(
                                     color: Colors.black,
                                     borderRadius: BorderRadius.circular(8),
-                                    boxShadow: [
+                                    boxShadow: const [
                                       BoxShadow(
                                         color: Color(0x5030303030),
                                         offset: Offset(0, 10),
                                         blurRadius: 20,
                                       )
                                     ]),
-                                child: Center(
+                                child: const Center(
                                     child: Text(
                                   'Register',
                                   style: TextStyle(color: Colors.white),
                                 )),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             TextButton(
                                 onPressed: () {},
-                                child: Text(
+                                child: const Text(
                                   "LOG IN",
                                   style: TextStyle(
                                       color: Colors.grey, fontSize: 17),
                                 )),
-                            SizedBox(
+                            const SizedBox(
                               height: 21,
                             ),
                           ],
